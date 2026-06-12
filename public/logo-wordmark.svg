@@ -1,0 +1,42 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">Movie Quotes wordmark</title>
+<desc id="desc">A neon film icon followed by the text Movie Quotes in a gradient.</desc>
+<defs>
+  <linearGradient id="bg" x1="32" y1="24" x2="360" y2="312" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#0D1224"/>
+    <stop offset="1" stop-color="#1B6F8F"/>
+  </linearGradient>
+  <linearGradient id="frame" x1="64" y1="64" x2="344" y2="280" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#71E7FF"/>
+    <stop offset="0.5" stop-color="#C86BFF"/>
+    <stop offset="1" stop-color="#F8E16C"/>
+  </linearGradient>
+  <linearGradient id="quote" x1="162" y1="160" x2="286" y2="256" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#F8E16C"/>
+    <stop offset="1" stop-color="#6AE7FF"/>
+  </linearGradient>
+  <linearGradient id="textGradient" x1="400" y1="104" x2="880" y2="228" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#71E7FF"/>
+    <stop offset="0.5" stop-color="#C86BFF"/>
+    <stop offset="1" stop-color="#F8E16C"/>
+  </linearGradient>
+</defs>
+<g transform="translate(12 8)">
+  <rect x="16" y="16" width="336" height="280" rx="64" fill="url(#bg)"/>
+  <rect x="44" y="48" width="280" height="224" rx="44" fill="rgba(255,255,255,0.06)" stroke="url(#frame)" stroke-width="6"/>
+  <rect x="76" y="112" width="220" height="134" rx="26" fill="rgba(255,255,255,0.07)" stroke="url(#frame)" stroke-width="8"/>
+  <g fill="url(#frame)">
+    <rect x="88" y="124" width="10" height="28" rx="5"/>
+    <rect x="88" y="164" width="10" height="28" rx="5"/>
+    <rect x="88" y="204" width="10" height="28" rx="5"/>
+    <rect x="274" y="124" width="10" height="28" rx="5"/>
+    <rect x="274" y="164" width="10" height="28" rx="5"/>
+    <rect x="274" y="204" width="10" height="28" rx="5"/>
+  </g>
+  <path d="M144 220c-15 0-25-12-25-30 0-22 13-48 32-65l13 9c-12 16-18 28-18 41 0 5 1 8 2 11 6-9 14-16 28-21l8 12c-14 12-23 26-24 43-5 0-10 0-16 0.5z" fill="url(#quote)"/>
+  <path d="M234 220c-15 0-25-12-25-30 0-22 13-48 32-65l13 9c-12 16-18 28-18 41 0 5 1 8 2 11 6-9 14-16 28-21l8 12c-14 12-23 26-24 43-5 0-10 0-16 0.5z" fill="url(#quote)"/>
+  <path d="M122 100c0-10 8-18 18-18h116c10 0 18 8 18 18v5c0 10-8 18-18 18H140c-10 0-18-8-18-18v-5z" fill="url(#frame)"/>
+</g>
+<text x="408" y="166" font-family="Poppins, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="86" font-weight="700" fill="url(#textGradient)" letter-spacing="2">Movie</text>
+<text x="408" y="238" font-family="Poppins, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="80" font-weight="600" fill="url(#textGradient)" letter-spacing="1.5">Quotes</text>
+</svg>

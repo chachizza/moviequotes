@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" fill="none">
+<title id="title">Movie Quotes icon</title>
+<desc id="desc">A simple double-quote mark centered on a gradient background.</desc>
+<defs>
+  <linearGradient id="bgGradient" x1="64" y1="40" x2="448" y2="472" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#11182E"/>
+    <stop offset="0.5" stop-color="#1D3D6A"/>
+    <stop offset="1" stop-color="#0E1A2D"/>
+  </linearGradient>
+  <linearGradient id="quoteGradient" x1="176" y1="168" x2="356" y2="344" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FBE27A"/>
+    <stop offset="1" stop-color="#6FE8FF"/>
+  </linearGradient>
+</defs>
+<rect x="16" y="16" width="480" height="480" rx="120" fill="url(#bgGradient)"/>
+<text x="256" y="270" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, 'Times New Roman', serif" font-size="240" font-weight="700" fill="url(#quoteGradient)">
+"
+</text>
+</svg>
