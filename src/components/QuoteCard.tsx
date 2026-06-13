@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import type { Quote } from '../data/quotes';
 import { useParticles } from '../hooks/useParticles';
 
@@ -96,7 +97,7 @@ export const QuoteCard: React.FC<QuoteCardProps> = ({ quote, textStyle }) => {
             >
                 <div className="quote-card" style={cardStyle}>
                     <div className="quote-icon">"</div>
-                    <p className="quote-text" style={textStyle}>{quote.text}</p>
+                    <p className="quote-text" style={textStyle}>{DOMPurify.sanitize(quote.text)}</p>
                     <div className="quote-meta">
                         <span className="quote-movie">{quote.source}</span>
                         <span className="quote-year">{quote.year}</span>
