@@ -20,6 +20,13 @@ const colorPalettes = [
 ];
 
 function App() {
+  // Ref to track mounted state for async safety
+  const isMountedRef = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
   const [currentQuote, setCurrentQuote] = useState<Quote | null>(null);
   const [colorPalette, setColorPalette] = useState(colorPalettes[0]);
   const [activeCategory, setActiveCategory] = useState<Category>('All');
@@ -62,19 +69,11 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCategory]);
 
-  const isTransitioningRef = useRef(isTransitioning);
-  const currentQuoteRef = useRef(currentQuote);
-  isTransitioningRef.current = isTransitioning;
-  currentQuoteRef.current = currentQuote;
-
+  // Simplified refresh: directly pick a new quote without transition guards
   const handleRefresh = useCallback(() => {
-    if (isTransitioningRef.current) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      pickRandomQuote(currentQuoteRef.current);
-      setIsTransitioning(false);
-    }, 300);
-  }, [pickRandomQuote]);
+    // Pick a new random quote, avoiding immediate repeat
+    pickRandomQuote(currentQuote);
+  }, [pickRandomQuote, currentQuote]);
 
   // Keyboard shortcut: Space to refresh
   useEffect(() => {
@@ -106,7 +105,7 @@ function App() {
       <div className="filter-chips-container">
         {CATEGORIES.map((cat) => (
           <button
-            key={cat}
+            key={`category-${cat}`}
             className={`filter-chip ${activeCategory === cat ? 'active' : ''}`}
             onClick={() => setActiveCategory(cat)}
           >

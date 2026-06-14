@@ -1,0 +1,22 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - img "Movie Quotes icon" [ref=e5]
+  - generic [ref=e6]:
+    - button "All" [ref=e7] [cursor=pointer]
+    - button "80s Movies" [ref=e8] [cursor=pointer]
+    - button "90s Movies" [ref=e9] [cursor=pointer]
+    - button "Classics" [ref=e10] [cursor=pointer]
+    - button "Modern" [ref=e11] [cursor=pointer]
+    - button "TV Shows" [ref=e12] [cursor=pointer]
+    - button "Action" [ref=e13] [cursor=pointer]
+    - button "Comedy" [ref=e14] [cursor=pointer]
+    - button "Future" [ref=e15] [cursor=pointer]
+  - generic [ref=e18]:
+    - generic [ref=e19]: "\""
+    - paragraph [ref=e20]: Hello. My name is Inigo Montoya. You killed my father. Prepare to die.
+    - generic [ref=e21]:
+      - generic [ref=e22]: The Princess Bride
+      - generic [ref=e23]: "1987"
+  - button "New quote" [ref=e24] [cursor=pointer]:
+    - generic [ref=e25]: ↻
+    - generic [ref=e26]: New Quote
