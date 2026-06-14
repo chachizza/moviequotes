@@ -20,6 +20,22 @@ const colorPalettes = [
 ];
 
 function App() {
+  // Refs to avoid stale closures
+  const isTransitioningRef = useRef(isTransitioning);
+  const currentQuoteRef = useRef<Quote | null>(currentQuote);
+
+  // Sync refs after state updates
+  useEffect(() => {
+    isTransitioningRef.current = isTransitioning;
+    currentQuoteRef.current = currentQuote;
+  }, [isTransitioning, currentQuote]);
+  // Ref to track mounted state for async safety
+  const isMountedRef = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
   const [currentQuote, setCurrentQuote] = useState<Quote | null>(null);
   const [colorPalette, setColorPalette] = useState(colorPalettes[0]);
   const [activeCategory, setActiveCategory] = useState<Category>('All');
@@ -62,18 +78,19 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCategory]);
 
-  const isTransitioningRef = useRef(isTransitioning);
-  const currentQuoteRef = useRef(currentQuote);
-  isTransitioningRef.current = isTransitioning;
-  currentQuoteRef.current = currentQuote;
+  const TRANSITION_DURATION_MS = 300;
 
+  // Refresh with transition guard and safety check
   const handleRefresh = useCallback(() => {
-    if (isTransitioningRef.current) return;
+    if (isTransitioningRef.current) return; // guard against rapid clicks
+    if (!isMountedRef.current) return; // safety if component unmounted
     setIsTransitioning(true);
     setTimeout(() => {
-      pickRandomQuote(currentQuoteRef.current);
-      setIsTransitioning(false);
-    }, 300);
+      if (isMountedRef.current) {
+        pickRandomQuote(currentQuoteRef.current);
+        setIsTransitioning(false);
+      }
+    }, TRANSITION_DURATION_MS);
   }, [pickRandomQuote]);
 
   // Keyboard shortcut: Space to refresh
@@ -106,7 +123,7 @@ function App() {
       <div className="filter-chips-container">
         {CATEGORIES.map((cat) => (
           <button
-            key={cat}
+            key={`category-${cat}`}
             className={`filter-chip ${activeCategory === cat ? 'active' : ''}`}
             onClick={() => setActiveCategory(cat)}
           >

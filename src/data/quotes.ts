@@ -376,6 +376,7 @@ export const CATEGORIES = [
   'TV Shows',
   'Action',
   'Comedy',
+  'Future',
 ] as const;
 
 export type Category = (typeof CATEGORIES)[number];
@@ -464,35 +465,37 @@ const COMEDY_MOVIES = new Set([
   'Ghostbusters',
 ]);
 
-export function getCategories(quote: Quote): Category[] {
-  const cats: Category[] = [];
-
-  if (TV_SHOWS.has(quote.source)) {
-    cats.push('TV Shows');
-  } else {
-    if (quote.year >= 1980 && quote.year <= 1989) {
-      cats.push('80s Movies');
-    }
-    if (quote.year >= 1990 && quote.year <= 1999) {
-      cats.push('90s Movies');
-    }
-    if (quote.year < 1980) {
-      cats.push('Classics');
-    }
-    if (quote.year >= 2000) {
-      cats.push('Modern');
-    }
-  }
-
-  if (ACTION_MOVIES.has(quote.source)) {
-    cats.push('Action');
-  }
-  if (COMEDY_MOVIES.has(quote.source)) {
-    cats.push('Comedy');
-  }
-
-  return cats;
-}
+// Deterministic current year for SSR / tests
++const CURRENT_YEAR = new Date().getFullYear();
++
++export function getCategories(quote: Quote): Category[] {
++  const cats: Category[] = [];
++
++  if (TV_SHOWS.has(quote.source)) {
++    cats.push('TV Shows');
++  } else {
++    if (quote.year > CURRENT_YEAR) {
++      cats.push('Future');
++    } else if (quote.year >= 1980 && quote.year <= 1989) {
++      cats.push('80s Movies');
++    } else if (quote.year >= 1990 && quote.year <= 1999) {
++      cats.push('90s Movies');
++    } else if (quote.year < 1980) {
++      cats.push('Classics');
++    } else if (quote.year >= 2000) {
++      cats.push('Modern');
++    }
++  }
++
++  if (ACTION_MOVIES.has(quote.source)) {
++    cats.push('Action');
++  }
++  if (COMEDY_MOVIES.has(quote.source)) {
++    cats.push('Comedy');
++  }
++
++  return cats;
++}
 
 export function filterQuotesByCategory(
   quoteList: Quote[],
