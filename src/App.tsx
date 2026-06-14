@@ -20,6 +20,15 @@ const colorPalettes = [
 ];
 
 function App() {
+  // Refs to avoid stale closures
+  const isTransitioningRef = useRef(isTransitioning);
+  const currentQuoteRef = useRef<Quote | null>(currentQuote);
+
+  // Sync refs after state updates
+  useEffect(() => {
+    isTransitioningRef.current = isTransitioning;
+    currentQuoteRef.current = currentQuote;
+  }, [isTransitioning, currentQuote]);
   // Ref to track mounted state for async safety
   const isMountedRef = useRef(true);
   useEffect(() => {
@@ -69,11 +78,20 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeCategory]);
 
-  // Simplified refresh: directly pick a new quote without transition guards
+  const TRANSITION_DURATION_MS = 300;
+
+  // Refresh with transition guard and safety check
   const handleRefresh = useCallback(() => {
-    // Pick a new random quote, avoiding immediate repeat
-    pickRandomQuote(currentQuote);
-  }, [pickRandomQuote, currentQuote]);
+    if (isTransitioningRef.current) return; // guard against rapid clicks
+    if (!isMountedRef.current) return; // safety if component unmounted
+    setIsTransitioning(true);
+    setTimeout(() => {
+      if (isMountedRef.current) {
+        pickRandomQuote(currentQuoteRef.current);
+        setIsTransitioning(false);
+      }
+    }, TRANSITION_DURATION_MS);
+  }, [pickRandomQuote]);
 
   // Keyboard shortcut: Space to refresh
   useEffect(() => {
